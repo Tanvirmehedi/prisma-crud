@@ -1,0 +1,66 @@
+
+GET http://localhost:3000/api/users
+
+###Post Request For Create User
+
+POST http://localhost:3000/api/users
+Content-Type:application/json
+
+{
+    "email":"tanvir@gmail.com",
+    "profile":{
+        "name":"Jishan"
+    },
+    "posts":{
+        "title":"create a post That make Sense"
+    }
+}
+
+### Delete
+
+DELETE http://localhost:3000/api/users/tanvirf3d2@gmail.com
+
+
+###Update
+
+PUT http://localhost:3000/api/users/2matro@gmail.com
+Content-Type: application/json
+
+{
+    "email":"matro@gmail.com",
+    "profile":{
+        "name":"Update 4devs"
+    },
+    "posts":{
+        "title":"first Title"
+    }
+}
+
+###Post Create
+POST http://localhost:3000/api/users/posts
+Content-Type: application/json
+
+{
+    "email":"2@gmail.com",
+    "title":"2this Post Is From Create Post"
+}
+
+###Get Post Data
+GET http://localhost:3000/api/users/posts/2@gmail.com/64f132f16a5bc1f5030bceb4
+
+###Get All Post Data
+GET http://localhost:3000/api/users/posts/2@gmail.com 
+
+###Delete All Post Data
+DELETE http://localhost:3000/api/users/posts/2@gmail.com 
+
+###Delete Single Post Data
+DELETE http://localhost:3000/api/users/posts/2@gmail.com/64f132f16a5bc1f5030bceb4
+
+###Update Single Post Data
+PUT http://localhost:3000/api/users/posts/2@gmail.com/64f132f16a5bc1f5030bceb4
+Content-Type: application/json
+
+{
+    "title":"Ai CHange The World"
+}
