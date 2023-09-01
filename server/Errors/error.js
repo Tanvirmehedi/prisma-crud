@@ -1,8 +1,8 @@
 /** @format */
 
-const myError = function (error, res) {
-  console.error(error);
-  res.status(500).json({ error });
+const myError = function ({message, res,statusCode}) {
+  console.error(message);
+  res.status(statusCode).json({ message });
 };
 
 export { myError };
