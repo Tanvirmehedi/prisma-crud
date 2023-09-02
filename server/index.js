@@ -7,9 +7,11 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { userRouter } from "./routes/userRoute.js";
 import { postRouter } from "./routes/postRoute.js";
+import { myError } from "./Errors/error.js";
 
 dotenv.config();
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -20,9 +22,10 @@ app.listen(PORT, () => {
   try {
     console.log(`Server is running on ${PORT}!`);
   } catch (err) {
-    console.log(err);
+    myError(err)
   }
 });
 
 app.use("/api", userRouter);
 app.use("/api", postRouter);
+app.use(myError);

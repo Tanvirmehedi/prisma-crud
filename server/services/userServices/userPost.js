@@ -1,9 +1,8 @@
 /** @format */
 
 import prisma from "../../config/prismaClient.js";
-import { myError } from "../../Errors/error.js";
 
-const userPost = async (req, res) => {
+const userPost = async (req, res,next) => {
   try {
     const { email, profile, posts } = req.body;
 
@@ -34,13 +33,13 @@ const userPost = async (req, res) => {
       });
       return;
     }
+    const error = new Error("You Are Already In Database");
+    error.status = 400;
+    next(error)
 
-    res.json({
-      message: "You Are Already In Database",
-      user: existingUser,
-    });
-  } catch (error) {
-    myError(error, res);
+  } catch (err) {
+    const error = new Error("Something Went Wrong!")
+    next(error)
   }
 };
 

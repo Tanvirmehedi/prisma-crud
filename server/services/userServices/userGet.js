@@ -1,9 +1,8 @@
 /** @format */
 
-import { myError } from "../../Errors/error.js";
 import prisma from "../../config/prismaClient.js";
 
-const allUserData = async (_req, res) => {
+const allUserData = async (_req, res,next) => {
   try {
     const users = await prisma.user.findMany({
       include: {
@@ -12,13 +11,17 @@ const allUserData = async (_req, res) => {
       },
     });
     if (users.length <= 0) {
-      res.json({ message: "No Data Found" });
+      const error = new Error("No Data Found!")
+      error.status = 400;
+      next(error)
       return;
     } else {
-      res.json(users);
+      res.status(200).json(users);
     }
-  } catch (error) {
-    myError(error, res);
+  } catch (err) {
+    const error = new Error(err)
+      error.status = 500;
+      next(error)
   }
 };
 

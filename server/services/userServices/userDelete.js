@@ -1,9 +1,8 @@
 /** @format */
 
-import { myError } from "../../Errors/error.js";
 import prisma from "../../config/prismaClient.js";
 
-const deleteSingleUser = async (req, res) => {
+const deleteSingleUser = async (req, res, next) => {
   try {
     const { userEmail } = req.params;
 
@@ -14,9 +13,9 @@ const deleteSingleUser = async (req, res) => {
     });
 
     if (!findUser) {
-      res.json({
-        message: "User Not FOund",
-      });
+      const error = new Error("User Not Found");
+      error.status = 400;
+      next(error);
       return;
     }
 
@@ -35,8 +34,10 @@ const deleteSingleUser = async (req, res) => {
     res.json({
       message: "User deleted & Associated Profile and Posts Deleted.",
     });
-  } catch (error) {
-    myError(error, res);
+  } catch (err) {
+    const error = new Error(err);
+    error.status = 500;
+    next(error);
   }
 };
 
