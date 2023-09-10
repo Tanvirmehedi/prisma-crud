@@ -14,7 +14,7 @@ const createPost = async (req, res) => {
 
     if (!findUser) {
       res.json({
-        message: "User Not In databes!",
+        message: "User Not In Database!",
         user: email,
       });
       return;
@@ -28,7 +28,7 @@ const createPost = async (req, res) => {
     });
 
     res.json({
-      message: "Find The User in Databes",
+      message: "Find The User in Database",
       user: createPost,
     });
   } catch (error) {
