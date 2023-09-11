@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import { userRouter } from "./routes/userRoute.js";
 import { postRouter } from "./routes/postRoute.js";
 import { myError } from "./Errors/error.js";
+import { categoryRouter } from "./routes/categoriesRoute.js";
 
 dotenv.config();
 const app = express();
@@ -22,10 +23,11 @@ app.listen(PORT, () => {
   try {
     console.log(`Server is running on ${PORT}!`);
   } catch (err) {
-    myError(err)
+    myError(err);
   }
 });
 
 app.use("/api", userRouter);
 app.use("/api", postRouter);
+app.use("/api", categoryRouter);
 app.use(myError);
