@@ -58,3 +58,5 @@ const getPost = async (req, res) => {
 };
 
 export { getPost, getAllPosts };
+
+

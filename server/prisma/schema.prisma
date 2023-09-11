@@ -24,6 +24,15 @@ model Profile {
 model Post {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   title       String
-  authorEmail String 
+  authorEmail String
   author      User   @relation(fields: [authorEmail], references: [email])
+  categoryIDs String[] @db.ObjectId
+  categories Category[] @relation(fields: [categoryIDs],references: [id])
+}
+
+model Category {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+  postIDs String[] @db.ObjectId
+  posts Post[] @relation(fields: [postIDs],references: [id])
 }
