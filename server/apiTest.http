@@ -74,7 +74,7 @@ POST http://localhost:3000/api/category
 Content-Type: application/json
 
 {
-    "name":"server"
+    "name":"All"
 }
 
 ### Delete Category

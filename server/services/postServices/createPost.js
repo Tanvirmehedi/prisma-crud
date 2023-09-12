@@ -5,7 +5,7 @@ import prisma from "../../config/prismaClient.js";
 
 const createPost = async (req, res) => {
   try {
-    const { email,title } = req.body;
+    const { email, title } = req.body;
     const findUser = await prisma.user.findFirst({
       where: {
         email: email,
@@ -20,10 +20,15 @@ const createPost = async (req, res) => {
       return;
     }
 
-    const createPost =await prisma.post.create({
+    const createPost = await prisma.post.create({
       data: {
         authorEmail: email,
-        title
+        title,
+        categories: {
+          connect:{
+            name:"All"
+          }
+        },
       },
     });
 
